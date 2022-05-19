@@ -10,30 +10,43 @@ import java.awt.event.ActionListener;
 
 public class CFrame extends JPanel implements ActionListener{
     
-    ArrayList<Formiga> formigas = new ArrayList<Formiga>();
+    Comida comida;
+    Formigueiro formigueiro;
     public static void main(String args[]){
         CFrame c = new CFrame();
     }
 
     public void paint(Graphics g){
-        /*g.setColor(Color.red);
-        g.fillOval(10,10,100,100);*/
         super.paintComponent(g);
-        for(Formiga f: formigas){
+        comida.paint(g);
+        formigueiro.paint(g);
+        for(Formiga f: formigueiro.getFormigas()){
             f.paint(g);
+            pegaComida(f);
+            largaComida(f);
         }
     }
-
+    private void pegaComida(Formiga f){
+        if(comida.pegaComida(f)){
+            for(Formiga formiga: formigueiro.getFormigas()){
+                if(formiga.getStatus()!=Formiga.Status.ENCONTROU_COMIDA){
+                    formiga.setStatus(Formiga.Status.SEGUE_COMIDA);
+                }
+            }
+        }
+    }
+    private void largaComida(Formiga f){
+        formigueiro.largaComida(f);
+    }
 
     public CFrame(){
         JFrame frame = new JFrame("Simulation");
         frame.setSize(800,600);
         frame.setBackground(Color.DARK_GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        for(int i = 0; i<100;i++){
-            formigas.add(new Formiga());
-        }
+        
+        formigueiro = new Formigueiro(1000);
+        comida = new Comida(10);
 
         Timer t = new Timer(16,this);
         t.start();
