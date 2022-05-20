@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CFrame extends JPanel implements ActionListener{
-    
+
     Comida comida;
     Formigueiro formigueiro;
     public static void main(String args[]){
@@ -28,11 +28,11 @@ public class CFrame extends JPanel implements ActionListener{
     }
     private void pegaComida(Formiga f){
         if(comida.pegaComida(f)){
-            for(Formiga formiga: formigueiro.getFormigas()){
+            /*for(Formiga formiga: formigueiro.getFormigas()){
                 if(formiga.getStatus()!=Formiga.Status.ENCONTROU_COMIDA){
                     formiga.setStatus(Formiga.Status.SEGUE_COMIDA);
                 }
-            }
+            }*/
         }
     }
     private void largaComida(Formiga f){
@@ -41,14 +41,14 @@ public class CFrame extends JPanel implements ActionListener{
 
     public CFrame(){
         JFrame frame = new JFrame("Simulation");
-        frame.setSize(800,600);
+        frame.setSize(1000,1000);
         frame.setBackground(Color.DARK_GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         formigueiro = new Formigueiro(1000);
         comida = new Comida(10);
 
-        Timer t = new Timer(16,this);
+        Timer t = new Timer(30,this);
         t.start();
 
         frame.add(this);
@@ -58,7 +58,6 @@ public class CFrame extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
         repaint();
     }
 
