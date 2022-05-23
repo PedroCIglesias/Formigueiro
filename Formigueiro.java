@@ -9,8 +9,10 @@ public class Formigueiro {
 
     public Formigueiro (int qnt_formigas){
         this.qnt_formigas = qnt_formigas;
-        x = (int)(Math.random()*790+0);
-        y = (int)(Math.random()*590+0);
+        x = 500;
+        y = 500;
+        //x = (int)(Math.random()*790+0);
+        //y = (int)(Math.random()*590+0);
         inicilizaFormigas();
     }
 
