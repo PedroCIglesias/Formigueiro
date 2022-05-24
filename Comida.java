@@ -21,7 +21,7 @@ public class Comida {
 
     public boolean pegaComida(Formiga f){
         Rectangle comida = new Rectangle(x,y,qnt,qnt);
-        Rectangle formiga = new Rectangle(f.pos.x,f.pos.y,10,10);
+        Rectangle formiga = new Rectangle((int)f.pos.x,(int)f.pos.y,10,10);
 
         if(formiga.intersects(comida)){
             qnt --;

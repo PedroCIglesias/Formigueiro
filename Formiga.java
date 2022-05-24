@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.Math;
+import java.awt.geom.Ellipse2D;
 
 import javax.sound.sampled.SourceDataLine;
 
@@ -11,8 +12,8 @@ public class Formiga{
     Map<Integer,Posicao> caminhoFormigueiro = new HashMap<Integer,Posicao>();
     Map<Integer,Posicao> caminhoComida = new HashMap<Integer,Posicao>();
     private static ArrayList<Map<Integer,Posicao>> caminhosComida = new ArrayList<Map<Integer,Posicao>>();
-    private int vx, vy, chave=0,chaveIndex=-1;
-    private int valorFormiga;
+    private double vx, vy;
+    private int valorFormiga,chave=0,chaveIndex=-1;;
 
     private Status status;
     public enum Status{
@@ -22,7 +23,7 @@ public class Formiga{
         LARGA_COMIDA
     }
 
-    public Formiga(int x, int y, int valorFormiga){
+    public Formiga(double x, double y, int valorFormiga){
         this.pos.x= x+55;
         this.pos.y= y+55;
         this.status = Status.PROCURA_COMIDA;
@@ -44,8 +45,13 @@ public class Formiga{
                 break;
         } 
         this.caminha();
-        g.drawString(""+valorFormiga+"", pos.x, pos.y);
-        g.fillOval(pos.x,pos.y,5,10);
+        Graphics2D gg = (Graphics2D)g;
+        Ellipse2D.Double shape = new Ellipse2D.Double(pos.x, pos.y, 5, 10);
+        gg.drawString(""+valorFormiga,(float)pos.x,(float)pos.y);
+        gg.setPaint(Color.RED);
+        gg.fill(shape);
+        gg.draw(shape);
+        //g.fillOval(pos.x,pos.y,5,10);
     }
 
     public void caminha(){
@@ -98,28 +104,35 @@ public class Formiga{
                     }
                 }
             }
-            Posicao posAux = new Posicao(0,0);
-            posAux.x= pos.x;
-            posAux.y = pos.y;
-            caminhoFormigueiro.put(chave++,posAux);
+            caminhoFormigueiro.put(chave++,new Posicao(pos.x,pos.y));
             int random_int = (int)Math.floor(Math.random()*(2-1+ 1)+1);
-            double sin= Math.sin(2*pos.x);
+            double sin= Math.sin(1000*pos.x);
             double sin2= Math.sin(Math.PI*pos.x);
+            sin = (sin + sin2);
+            vx = sin;
+
+            double siny= Math.sin(2*pos.y);
+            double siny2= Math.sin(Math.PI*pos.y);
+            siny = (siny + siny2);
+            vy = siny;
+
+            pos.x -= vx;
+            pos.y -= 2;
             //vx = (int)(Math.random()*(4+1)+-3);
-            vy = (int)(Math.random()*(4+1)+-3);
+            //vy = (int)(Math.random()*(4+1)+-3);
             if(pos.x<0 || pos.x>= 790){
             vx *= -1;
             }
             if(pos.y<0 || pos.y>= 790){
             vy *= -1;
             }
-            if(random_int==1){
+            /*if(random_int==1){
                 pos.x -= vx;
                 pos.y -= vy;
             }else{
                 pos.x += vx;
                 pos.y += vy;
-            }
+            }*/
         }
         
 
@@ -130,8 +143,8 @@ public class Formiga{
             case 0:
                 caminhoFormigueiro.put(chave++,new Posicao(pos.x,pos.y));
                 int vaiVolta = (int)Math.floor(Math.random()*(2-1+ 1)+1);
-                //vx = (int)(Math.random()*(4+1)+-3);
-                //vy = (int)(Math.random()*(4+1)+-3);
+                vx = (int)(Math.random()*(4+1)+-3);
+                vy = (int)(Math.random()*(4+1)+-3);
                 if(pos.x<0 || pos.x>= 790){
                 vx *= -1;
                 }

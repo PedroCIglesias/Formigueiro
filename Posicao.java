@@ -1,7 +1,7 @@
 public class Posicao {
-    int x,y;
+    double x,y;
 
-    public Posicao(int x, int y){
+    public Posicao(double x, double y){
         this.x = x;
         this.y = y;        
     }

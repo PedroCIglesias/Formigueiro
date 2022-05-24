@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
-
+import java.awt.geom.Ellipse2D;
 
 public class Formigueiro {
     private int qnt_formigas;
@@ -17,8 +17,13 @@ public class Formigueiro {
     }
 
     public void paint(Graphics g){
-        g.setColor(Color.RED);
-        g.fillOval(x,y,100,100);
+        //g.setColor(Color.RED);
+        Graphics2D gg = (Graphics2D)g;
+        Ellipse2D.Double shape = new Ellipse2D.Double(x, y, 70, 70);
+        gg.setPaint(Color.RED);
+        gg.fill(shape);
+        gg.draw(shape);
+        //g.fillOval(x,y,100,100);
     }
     private void inicilizaFormigas(){
         int aux = 0;
@@ -28,7 +33,7 @@ public class Formigueiro {
     }
     public void largaComida(Formiga f){
         Rectangle formigueiro = new Rectangle(x,y,100,100);
-        Rectangle formiga = new Rectangle(f.pos.x,f.pos.y,10,10);
+        Rectangle formiga = new Rectangle((int)f.pos.x,(int)f.pos.y,10,10);
 
         if(formiga.intersects(formigueiro)&&(f.getStatus()!=Formiga.Status.RASTREA_COMIDA)){
             if(f.getStatus()==Formiga.Status.ENCONTRA_COMIDA){
