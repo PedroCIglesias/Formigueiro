@@ -25,7 +25,7 @@ public class Comida {
 
         if(formiga.intersects(comida)){
             qnt --;
-            f.setStatus(Formiga.Status.ENCONTROU_COMIDA);
+            f.setStatus(Formiga.Status.ENCONTRA_COMIDA);
             return true;
         }
         if(qnt==0){

@@ -30,9 +30,9 @@ public class Formigueiro {
         Rectangle formigueiro = new Rectangle(x,y,100,100);
         Rectangle formiga = new Rectangle(f.pos.x,f.pos.y,10,10);
 
-        if(formiga.intersects(formigueiro)&&(f.getStatus()!=Formiga.Status.RASTREOU_COMIDA)){
-            if(f.getStatus()==Formiga.Status.ENCONTROU_COMIDA){
-                f.setStatus(Formiga.Status.LARGOU_COMIDA);
+        if(formiga.intersects(formigueiro)&&(f.getStatus()!=Formiga.Status.RASTREA_COMIDA)){
+            if(f.getStatus()==Formiga.Status.ENCONTRA_COMIDA){
+                f.setStatus(Formiga.Status.LARGA_COMIDA);
             }else
                 f.setStatus(Formiga.Status.PROCURA_COMIDA);
         }
