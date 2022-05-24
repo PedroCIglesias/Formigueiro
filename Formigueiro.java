@@ -21,16 +21,20 @@ public class Formigueiro {
         g.fillOval(x,y,100,100);
     }
     private void inicilizaFormigas(){
+        int aux = 0;
         for(int i=0;i<=qnt_formigas;i++){
-            formigas.add(new Formiga(x,y));
+            formigas.add(new Formiga(x,y,aux++));
         }
     }
     public void largaComida(Formiga f){
         Rectangle formigueiro = new Rectangle(x,y,100,100);
         Rectangle formiga = new Rectangle(f.pos.x,f.pos.y,10,10);
 
-        if(formiga.intersects(formigueiro)){
-            f.setStatus(Formiga.Status.PROCURA_COMIDA);
+        if(formiga.intersects(formigueiro)&&(f.getStatus()!=Formiga.Status.RASTREOU_COMIDA)){
+            if(f.getStatus()==Formiga.Status.ENCONTROU_COMIDA){
+                f.setStatus(Formiga.Status.LARGOU_COMIDA);
+            }else
+                f.setStatus(Formiga.Status.PROCURA_COMIDA);
         }
     }
     public ArrayList<Formiga> getFormigas(){

@@ -44,9 +44,9 @@ public class CFrame extends JPanel implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         formigueiro = new Formigueiro(10);
-        comida = new Comida(100);
+        comida = new Comida(50);
 
-        Timer t = new Timer(30,this);
+        Timer t = new Timer(1,this);
         t.start();
 
         frame.add(this);

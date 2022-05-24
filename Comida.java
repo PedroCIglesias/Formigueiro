@@ -7,14 +7,15 @@ public class Comida {
 
     public Comida (int qnt){
         this.qnt = qnt;
-        x = 550;
-        y=650;
+        x = 520;
+        y=620;
         //x = (int)(Math.random()*790+0);
         //y = (int)(Math.random()*590+0);
     }
 
     public void paint(Graphics g){
         g.setColor(Color.GREEN);
+        g.drawString(""+qnt+"", x-+100, y+100);
         g.fillOval(x,y,qnt,qnt);
     }
 
