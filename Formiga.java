@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.sound.sampled.SourceDataLine;
+
 public class Formiga{
     Posicao pos = new Posicao();
     Map<Integer,Posicao> caminho = new HashMap<Integer,Posicao>();
@@ -26,11 +28,17 @@ public class Formiga{
     }
 
     public void paint(Graphics g){
-        if(status.ordinal()==0){
-            g.setColor(Color.RED);
-        }else
-            g.setColor(Color.GREEN);
-        
+        switch(status.ordinal()){
+            case 0: 
+                g.setColor(Color.RED);
+                break;
+            case 1:
+                g.setColor(Color.GREEN);
+                break;
+            case 2:
+                g.setColor(Color.BLUE);
+                break;
+        } 
         this.caminha();
         g.fillOval(pos.x,pos.y,5,10);
     }
@@ -63,11 +71,15 @@ public class Formiga{
                 }
             }
         }else{
+            if(caminhosComida.contains(caminho)){
+                status = Status.RASTREOU_COMIDA;
+                this.chaveIndex = 0;
+                return;
+            }
             if(caminhosComida.size()>0){
                 for(Map<Integer,Posicao> c : caminhosComida){
                     for(int i=0; i<=c.size()-1;i++){
-                        if((c.get(i).x==pos.x && c.get(i).x==pos.x &&
-                        c.get(i).y==pos.y && c.get(i).y==pos.y)){
+                        if((c.get(i).x==pos.x && c.get(i).y==pos.y)){
                             this.caminho = c;
                             this.chaveIndex = i;
                             status = Status.RASTREOU_COMIDA;

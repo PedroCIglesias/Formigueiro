@@ -1,9 +1,7 @@
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.awt.Color;
-import javax.swing.JFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,8 +43,8 @@ public class CFrame extends JPanel implements ActionListener{
         frame.setBackground(Color.DARK_GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        formigueiro = new Formigueiro(1000);
-        comida = new Comida(10);
+        formigueiro = new Formigueiro(10);
+        comida = new Comida(100);
 
         Timer t = new Timer(30,this);
         t.start();
